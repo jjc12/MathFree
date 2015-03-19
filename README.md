@@ -5,9 +5,7 @@ objects:
 
 -Matrices (found in MatrixFree)
 
-The first implementation of this library on GitHub was uploaded on March 19th, 2015. This implies it's new and the
-classes themselves may contain bugs that I'm not aware of. There is a lot to build on so expect improvements on this
-library and the GitHub page daily. Specifically, I still need to add the sections "demonstration" and "features" to each
+Specifically, I still need to add the sections "demonstration" and "features" to each
 class, along with the sections "Questions & Issues", "Documentation", "usage", and "license". 
 
 If a bug is found, please submit an e-mail to jjc12@my.fsu.edu with a description of the bug. This project is my priority
