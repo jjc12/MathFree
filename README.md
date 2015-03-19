@@ -21,6 +21,4 @@ MatrixFree is a class written to manipulate matrices.
 Updates:
 
 3/19/2015
-Create README.md file.
-Upload squarematrix_free.h file to MatrixFree library.
-Upload squarematrix_free.cpp file to MatrixFree library.
+Create README.md file. Upload squarematrix_free.h file to MatrixFree library. Upload squarematrix_free.cpp file to MatrixFree library.
