@@ -10,7 +10,9 @@ objects:
 
 -Matrices (found in MatrixFree)
 
-The **wiki** button that looks like an open book on the toolbar to the right provides a user guide to using these objects. If you believe you have an issue that cannot be solved by reading the guides, you may e-mail me at jjc12@my.fsu.edu with the subject: "ISSUE: your_one_line_description_of_the_issue" and body: "your_longer_description_of_the_issue".
+<a href="https://github.com/jjc12/MathFree/wiki">Wiki: MathFree</a> provides a user guide for usage of the objects. Clicking the button that looks like an open book on the toolbar to the right will also take you there.
+
+If you believe you have an issue that cannot be solved by reading the guides, you may e-mail me at jjc12@my.fsu.edu with the subject: "ISSUE: your_one_line_description_of_the_issue" and body: "your_longer_description_of_the_issue".
 
 # MatrixFree
 
