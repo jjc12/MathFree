@@ -3,16 +3,14 @@ class, along with the sections "Questions & Issues", "Documentation", "usage", a
 
 # MathFree
 
-_If a bug is found, please submit an e-mail to jjc12@my.fsu.edu with the subject: "BUG: your_one_line_description_of_the_bug" and body: "your_longer_description_of_the_bug". This project is my priority so expect bugs to disappear **as soon as possible**_.
-
 MathFree is a free, open-source C++ library that includes files written to manipulate the following mathematics-based
 objects:
 
 -Matrices (found in MatrixFree)
 
-<a href="https://github.com/jjc12/MathFree/wiki">Wiki: MathFree</a> provides a user guide for usage of the objects. Clicking the button that looks like an open book on the toolbar to the right will also take you there.
+The source code can be found at 
 
-If you believe you have an issue that cannot be solved by reading the guides, you may e-mail me at jjc12@my.fsu.edu with the subject: "ISSUE: your_one_line_description_of_the_issue" and body: "your_longer_description_of_the_issue".
+*Note: <a href="https://github.com/jjc12/MathFree/wiki">Wiki: MathFree</a> provides a user guide for usage of the objects. Clicking the button that looks like an open book on the toolbar to the right will also take you there.*
 
 # MatrixFree
 
@@ -24,6 +22,14 @@ Updates (should go in wiki/updates):
 Create README.md file.  
 Upload squarematrix_free.h file to MatrixFree library.  
 Upload squarematrix_free.cpp file to MatrixFree library.  
+
+# The Bad, and the Ugly, and the Good
+
+If a bug is found, please submit an e-mail to jjc12@my.fsu.edu with the subject: "BUG: *your one line description of the bug*. This project is my priority so expect bugs to disappear **as soon as possible**.
+
+If you believe you have an issue that cannot be solved by reading the guides, you may e-mail me at jjc12@my.fsu.edu with the subject: "ISSUE: *your one line description of the issue*.
+
+If you can make this program better, please submit an e-mail to jjc12@my.fsu.edu with the subject: "SUGGESTION: *your one line description of the suggestion*. Alternatively, you may read the <a href="https://github.com/jjc12/MathFree/wiki">Wiki: MathFree -> Suggestions</a> and learn how to contribute to this project *with your own code*!
 
 # Donate
 
