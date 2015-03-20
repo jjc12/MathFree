@@ -39,7 +39,7 @@ Upload squarematrix_free.cpp file to MatrixFree library.
 
 The source code and header files for your preferred object can be found at <a href="https://github.com/jjc12/MathFree/tree/master">branch: master</a>.
 
-*Note: <a href="https://github.com/jjc12/MathFree/wiki">Wiki: MathFree</a> provides a user guide for usage of the objects. Clicking the button that looks like an open book on the toolbar to the right will also take you there.*
+*Note: <a href="https://github.com/jjc12/MathFree/wiki">Wiki: MathFree</a> provides a user guide for usage of the objects. Clicking the button that looks like an open book on the toolbar to the right at the top of this page will also take you there.*
 
 ## The Bad, the Ugly, and the Good
 
