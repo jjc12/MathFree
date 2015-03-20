@@ -8,13 +8,30 @@ objects:
 
 -Matrices (found in MatrixFree)
 
-The source code can be found at 
+The source code can be found at **SOME LINK HERE**.
 
 *Note: <a href="https://github.com/jjc12/MathFree/wiki">Wiki: MathFree</a> provides a user guide for usage of the objects. Clicking the button that looks like an open book on the toolbar to the right will also take you there.*
 
-# MatrixFree
+### MatrixFree
 
 MatrixFree is a class written to manipulate matrices.
+
+##### Demonstration 
+
+##### Features 
+
+- Construct a matrix of size nxn
+- Read in values from a file or the console
+- Add, subtract, and multiply a matrix with other matrices
+- Add, subtract, multiply, and swap rows in a matrix
+- Change or obtain individual values
+- Obtain a submatrix
+- Perform transformations on a 2x2 matrix
+- Get the reduced (or row reduced) form
+- Get a determinant
+- Obtain an inverse
+- Test whether the matrix is linearly independent or not
+- Solve Ax = b
 
 Updates (should go in wiki/updates):
 
@@ -23,13 +40,13 @@ Create README.md file.
 Upload squarematrix_free.h file to MatrixFree library.  
 Upload squarematrix_free.cpp file to MatrixFree library.  
 
-# The Bad, and the Ugly, and the Good
+## The Bad, the Ugly, and the Good
 
 If a bug is found, please submit an e-mail to jjc12@my.fsu.edu with the subject: "BUG: *your one line description of the bug*. This project is my priority so expect bugs to disappear **as soon as possible**.
 
-If you believe you have an issue that cannot be solved by reading the guides, you may e-mail me at jjc12@my.fsu.edu with the subject: "ISSUE: *your one line description of the issue*.
+If you have an issue that cannot be solved by reading the guides, you may e-mail me at jjc12@my.fsu.edu with the subject: "ISSUE: *your one line description of the issue*. I'll gladly walk us through the issue and eliminate your frustration :)
 
-If you can make this program better, please submit an e-mail to jjc12@my.fsu.edu with the subject: "SUGGESTION: *your one line description of the suggestion*. Alternatively, you may read the <a href="https://github.com/jjc12/MathFree/wiki">Wiki: MathFree -> Suggestions</a> and learn how to contribute to this project *with your own code*!
+If you believe you can make this program better, please submit an e-mail to jjc12@my.fsu.edu with the subject: "SUGGESTION: *your one line description of the suggestion*. Alternatively, you may read the <a href="https://github.com/jjc12/MathFree/wiki">Wiki: MathFree -> Suggestions</a> and learn how to contribute to this project *with your own code*!
 
 # Donate
 
