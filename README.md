@@ -41,11 +41,11 @@ Upload squarematrix_free.cpp file to MatrixFree library.
 
 ## The Bad, the Ugly, and the Good
 
-If a bug is found, please submit an e-mail to jjc12@my.fsu.edu with the subject: "BUG: *your one line description of the bug*. This project is my priority so expect bugs to disappear **as soon as possible**.
+If a bug is found, please submit an e-mail to jjc12@my.fsu.edu with the subject: "BUG: *your one line description of the bug*". This project is my priority so expect bugs to disappear **as soon as possible**.
 
-If you have an issue that cannot be solved by reading the guides, you may e-mail me at jjc12@my.fsu.edu with the subject: "ISSUE: *your one line description of the issue*. I'll gladly help you out and walk us through the issue, no matter how trivial.
+If you have an issue that cannot be solved by reading the guides, you may e-mail me at jjc12@my.fsu.edu with the subject: "ISSUE: *your one line description of the issue*". I'll gladly help you out and walk us through the issue, no matter how trivial.
 
-If you believe you can make this program better, please submit an e-mail to jjc12@my.fsu.edu with the subject: "SUGGESTION: *your one line description of the suggestion*. Alternatively, you may read <a href="https://github.com/jjc12/MathFree/wiki">Wiki: MathFree > Suggestions</a> and learn how to contribute to this project *with your own code*.
+If you believe you can make this program better, please submit an e-mail to jjc12@my.fsu.edu with the subject: "SUGGESTION: *your one line description of the suggestion*". Alternatively, you may read <a href="https://github.com/jjc12/MathFree/wiki">Wiki: MathFree > Suggestions</a> and learn how to contribute to this project *with your own code*.
 
 # Donate
 
