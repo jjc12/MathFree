@@ -1,4 +1,4 @@
-I still need to add the sections "Questions & Issues", "Documentation", and "license". 
+I still need to add the sections "license". 
 
 # MathFree
 
@@ -43,11 +43,11 @@ The source code and header files for your preferred object can be found at <a hr
 
 ## The Bad, the Ugly, and the Good
 
-#### Found a bug?
+### Found a bug?
 
 If a bug is found, please submit an e-mail to jjc12@my.fsu.edu with the subject: "BUG: *your one line description of the bug*". This project is my priority so expect bugs to disappear **as soon as possible**.
 
-#### Can't work through an issue?
+### Can't work through an issue?
 
 If you have an issue that cannot be solved by reading the guides, you may e-mail me at jjc12@my.fsu.edu with the subject: "ISSUE: *your one line description of the issue*". I'll gladly help you out and walk us through the issue, no matter how trivial.
 
