@@ -1,19 +1,15 @@
-I still need to add the sections "Questions & Issues", "Documentation", "usage", and "license". 
+I still need to add the sections "Questions & Issues", "Documentation", and "license". 
 
 # MathFree
 
 MathFree is a free, open-source C++ library that includes files written to manipulate the following mathematics-based
 objects:
 
--Matrices (found in MatrixFree)
-
-The source code and header files for your preferred object can be found at <a href="https://github.com/jjc12/MathFree/tree/master">branch: master</a>.
-
-*Note: <a href="https://github.com/jjc12/MathFree/wiki">Wiki: MathFree</a> provides a user guide for usage of the objects. Clicking the button that looks like an open book on the toolbar to the right will also take you there.*
+-Square matrices (found in SquareMatrixFree)
 
 ### SquareMatrixFree
 
-SquareMatrixFree is a class written to manipulate square (nxn) matrices.
+SquareMatrix is a class written to manipulate square (nxn) matrices.
 
 ##### Demonstration 
 
@@ -38,6 +34,12 @@ Updates (should go in wiki/updates):
 Create README.md file.  
 Upload squarematrix_free.h file to MatrixFree library.  
 Upload squarematrix_free.cpp file to MatrixFree library.  
+
+## Show me the source code! (And how do I use it?)
+
+The source code and header files for your preferred object can be found at <a href="https://github.com/jjc12/MathFree/tree/master">branch: master</a>.
+
+*Note: <a href="https://github.com/jjc12/MathFree/wiki">Wiki: MathFree</a> provides a user guide for usage of the objects. Clicking the button that looks like an open book on the toolbar to the right will also take you there.*
 
 ## The Bad, the Ugly, and the Good
 
