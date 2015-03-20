@@ -12,15 +12,15 @@ The source code can be found at **SOME LINK HERE**.
 
 *Note: <a href="https://github.com/jjc12/MathFree/wiki">Wiki: MathFree</a> provides a user guide for usage of the objects. Clicking the button that looks like an open book on the toolbar to the right will also take you there.*
 
-### MatrixFree
+### SquareMatrixFree
 
-MatrixFree is a class written to manipulate matrices.
+SquareMatrixFree is a class written to manipulate square (nxn) matrices.
 
 ##### Demonstration 
 
 ##### Features 
 
-- Construct a matrix of size nxn
+- Construct a matrix object of size nxn
 - Read in values from a file or the console
 - Add, subtract, and multiply a matrix with other matrices
 - Add, subtract, multiply, and swap rows in a matrix
