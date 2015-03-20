@@ -1,5 +1,4 @@
-I still need to add the sections "demonstration" and "features" to each
-class, along with the sections "Questions & Issues", "Documentation", "usage", and "license". 
+I still need to add the sections "Questions & Issues", "Documentation", "usage", and "license". 
 
 # MathFree
 
