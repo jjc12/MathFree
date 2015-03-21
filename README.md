@@ -9,7 +9,7 @@ objects:
 
 ### SquareMatrixFree
 
-SquareMatrix is a class written to manipulate square (nxn) matrices.
+SquareMatrix is a class written to manipulate square nxn matrices.
 
 ##### Demonstration 
 
