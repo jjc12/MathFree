@@ -67,7 +67,7 @@ If fixed amounts put you off,
 <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=VDW48HYE6A3Y2&lc=US&item_name=MathFree&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted">**it's entirely up to you**</a>.
 
 
-###### GNU GPL v3.0 License
+##### GNU GPL v3.0 License
 ```
   MathFree - the open-source library for manipulating mathematics-based objects  
      Copyright (C) 2015  Jossie Calderon
