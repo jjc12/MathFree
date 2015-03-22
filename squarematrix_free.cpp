@@ -41,13 +41,13 @@ void SquareMatrix::helperFunc(std::string &strnum){
 }
 
 
-SquareMatrix::SquareMatrix(int size){ //constructs a size-by-size matrix.
+SquareMatrix::SquareMatrix(int dimension){ //constructs a size-by-size matrix.
 
-	if (size <= 0){
-		dimension = 1;
+	if (dimension <= 0){
+		this->dimension = 1;
 	}
 	else{
-		dimension = size;
+		this->dimension = dimension;
 	}
 
 	int rowCounter = 0;
@@ -63,9 +63,16 @@ SquareMatrix::SquareMatrix(int size){ //constructs a size-by-size matrix.
 
 }
 
-SquareMatrix::SquareMatrix(const SquareMatrix& m){ //copy constructs a size-by-size matrix.
+//copy constructs a size-by-size matrix.
+SquareMatrix::SquareMatrix(const SquareMatrix& m){
 
-	dimension = m.dimension;
+	//in case copy constructor copies to itself.
+	if (&m == this){
+		this->dimension = 1;
+	}
+	else{
+		dimension = m.dimension;
+	}
 	int rowCounter = 0;
 
 	do {
@@ -85,7 +92,10 @@ SquareMatrix::SquareMatrix(const SquareMatrix& m){ //copy constructs a size-by-s
 
 }
 
-SquareMatrix SquareMatrix::operator=(const SquareMatrix& m){ //sets two matrices equal (deep copy)
+//sets two matrices equal (deep copy)
+SquareMatrix SquareMatrix::operator=(const SquareMatrix& m){
+
+	std::cout << "The copy constructor runs";
 
 	dimension = m.dimension;
 	SquareMatrix rM(dimension);
@@ -103,12 +113,14 @@ SquareMatrix SquareMatrix::operator=(const SquareMatrix& m){ //sets two matrices
 const double& SquareMatrix::operator()(int i, int j) const{
 
 	if (i < 1 || dimension < i){
-		std::cout << "Index " << i << " is out of bounds; bound is " << dimension << std::endl;
+		std::cout << "Index " << i << " is out of bounds; bound is "
+			<< dimension << std::endl;
 		std::cout << "Returning element in row 1, column 1..." << std::endl;
 		return matrix[0][0];
 	}
 	else if (j < 1 || dimension < j){
-		std::cout << "Index " << j << " is out of bounds; bound is " << dimension << std::endl;
+		std::cout << "Index " << j << " is out of bounds; bound is "
+			<< dimension << std::endl;
 		std::cout << "Returning element in row 1, column 1..." << std::endl;
 		return matrix[0][0];
 	}
@@ -120,12 +132,14 @@ const double& SquareMatrix::operator()(int i, int j) const{
 double& SquareMatrix::operator()(int i, int j){
 
 	if (i < 1 || dimension < i){
-		std::cout << "Index " << i << " is out of bounds; bound is " << dimension << std::endl;
+		std::cout << "Index " << i << " is out of bounds; bound is "
+			<< dimension << std::endl;
 		std::cout << "Returning element in row 1, column 1..." << std::endl;
 		return matrix[0][0];
 	}
 	else if (j < 1 || dimension < j){
-		std::cout << "Index " << j << " is out of bounds; bound is " << dimension << std::endl;
+		std::cout << "Index " << j << " is out of bounds; bound is "
+			<< dimension << std::endl;
 		std::cout << "Returning element in row 1, column 1..." << std::endl;
 		return matrix[0][0];
 	}
@@ -166,7 +180,8 @@ SquareMatrix SquareMatrix::operator-(const SquareMatrix& matrix2) const{
 	//the end subtractand
 	SquareMatrix mProd(dimension);
 
-	for (int i = 0; i < dimension; ++i){ //performing the matrix multiplication.
+	//performing the matrix multiplication.
+	for (int i = 0; i < dimension; ++i){
 		for (int j = 0; j < dimension; ++j){
 			mProd.matrix[i][j] = matrix[i][j] - matrix2.matrix[i][j];
 		}
@@ -260,7 +275,8 @@ void SquareMatrix::consoleInput(){ //inputs for the nxn matrix.
 	int rowCounter = 0;
 
 	do {
-		std::cout << "Enter coefficients of linear equation " << rowCounter + 1 << ":" << std::endl;
+		std::cout << "Enter coefficients of linear equation "
+			<< rowCounter + 1 << ":" << std::endl;
 		for (int j = 0; j < dimension; ++j){
 			std::cin >> acoeff;
 			helperFunc(acoeff);
@@ -271,7 +287,8 @@ void SquareMatrix::consoleInput(){ //inputs for the nxn matrix.
 
 }
 
-void SquareMatrix::fileInput(std::string filename){ //inputs for the nxn matrix.
+//inputs for the nxn matrix.
+void SquareMatrix::fileInput(std::string filename){
 
 	std::string acoeff;
 	int rowCounter = 0;
@@ -290,7 +307,7 @@ void SquareMatrix::fileInput(std::string filename){ //inputs for the nxn matrix.
 
 }
 
-void SquareMatrix::Show() const{
+void SquareMatrix::show() const{
 	std::cout << "The matrix is " << std::endl;
 	for (int i = 0; i < dimension; ++i){ //output of matrix
 		for (int j = 0; j < dimension; ++j){
@@ -305,7 +322,7 @@ int SquareMatrix::getDimension() const{
 	return dimension;
 }
 
-SquareMatrix SquareMatrix::Transpose() const{
+SquareMatrix SquareMatrix::transpose() const{
 
 	SquareMatrix trans(dimension);
 	for (int i = 0; i < dimension; ++i){
@@ -318,7 +335,8 @@ SquareMatrix SquareMatrix::Transpose() const{
 
 }
 
-SquareMatrix& SquareMatrix::rowAdd(int rownum1, int rownum2, double multiplier){
+SquareMatrix& 
+	SquareMatrix::rowAdd(int rownum1, int rownum2, double multiplier){
 
 	if (rownum1 < 1 || dimension < rownum1){
 		std::cout << "Error: Parameter 1 out of bounds" << std::endl;
@@ -337,7 +355,8 @@ SquareMatrix& SquareMatrix::rowAdd(int rownum1, int rownum2, double multiplier){
 
 }
 
-SquareMatrix& SquareMatrix::rowNeg(int rownum1, int rownum2, double multiplier){
+SquareMatrix& 
+	SquareMatrix::rowNeg(int rownum1, int rownum2, double multiplier){
 
 	if (rownum1 < 1 || dimension < rownum1){
 		std::cout << "Error: Parameter 1 out of bounds" << std::endl;
@@ -383,6 +402,7 @@ SquareMatrix& SquareMatrix::rowSwap(int rownum1, int rownum2){
 	}
 	else if (rownum1 == rownum2){
 		std::cout << "No swap performed: parameters are equal" << std::endl;
+		return *this;
 	}
 
 	std::vector<double> temp(dimension, 0);
@@ -397,14 +417,21 @@ SquareMatrix& SquareMatrix::rowSwap(int rownum1, int rownum2){
 
 }
 
-SquareMatrix SquareMatrix::Submatrix(int row, int column) const{
+SquareMatrix SquareMatrix::submatrix(int row, int column) const{
+
+	if (dimension == 1){
+		SquareMatrix temp;
+		return temp;
+	}
 
 	if (row < 1 || dimension < row){
-		std::cout << "Index " << row << " is out of bounds; bound is " << dimension << std::endl;
+		std::cout << "Index " << row << " is out of bounds; bound is "
+			<< dimension << std::endl;
 		return *this;
 	}
 	else if (column < 1 || dimension < column){
-		std::cout << "Index " << column << " is out of bounds; bound is " << dimension << std::endl;
+		std::cout << "Index " << column << " is out of bounds; bound is "
+			<< dimension << std::endl;
 		return *this;
 	}
 
@@ -430,121 +457,174 @@ SquareMatrix SquareMatrix::Submatrix(int row, int column) const{
 
 }
 
-SquareMatrix SquareMatrix::horizontalShear(double multiplier) const{
+std::vector<double> SquareMatrix::translation(double x, double y,
+	std::vector<double> myVector){
 
-	if (dimension != 2){
-		std::cout << "Error: Must be a 2-dimensional matrix" << std::endl;
-		return *this;
+	if (myVector.size() != 3){
+		std::cout << "Error: Must be a 3-dimensional vector" << std::endl;
+		return std::vector < double > {0, 0, 0};
 	}
 
-	SquareMatrix mNew(dimension);
+	SquareMatrix mNew(3);
+
+	mNew.matrix[0][0] = 1;
+	mNew.matrix[0][1] = 0;
+	mNew.matrix[0][2] = x;
+	mNew.matrix[1][0] = 0;
+	mNew.matrix[1][1] = 1;
+	mNew.matrix[1][2] = y;
+	mNew.matrix[2][0] = 0;
+	mNew.matrix[2][1] = 0;
+	mNew.matrix[2][2] = 1;
+
+	return mNew*myVector;
+}
+
+std::vector<double> SquareMatrix::horizontalShear(double multiplier,
+	std::vector<double> myVector){
+
+	if (myVector.size() != 3){
+		std::cout << "Error: Must be a 3-dimensional vector" << std::endl;
+		return std::vector < double > {0, 0, 0};
+	}
+
+	SquareMatrix mNew(3);
 
 	mNew.matrix[0][0] = 1;
 	mNew.matrix[0][1] = multiplier;
+	mNew.matrix[0][2] = 0;
 	mNew.matrix[1][0] = 0;
 	mNew.matrix[1][1] = 1;
+	mNew.matrix[1][2] = 0;
+	mNew.matrix[2][0] = 0;
+	mNew.matrix[2][1] = 0;
+	mNew.matrix[2][2] = 1;
 
-	return mNew**this;
+	return mNew*myVector;
 
 }
 
-SquareMatrix SquareMatrix::verticalShear(double multiplier) const{
+std::vector<double> SquareMatrix::verticalShear(double multiplier,
+	std::vector<double> myVector){
 
-	if (dimension != 2){
-		std::cout << "Error: Must be a 2-dimensional matrix" << std::endl;
-		return *this;
+	if (myVector.size() != 3){
+		std::cout << "Error: Must be a 3-dimensional vector" << std::endl;
+		return std::vector < double > {0, 0, 0};
 	}
 
-	SquareMatrix mNew(dimension);
+	SquareMatrix mNew(3);
 
 	mNew.matrix[0][0] = 1;
 	mNew.matrix[0][1] = 0;
+	mNew.matrix[0][2] = 0;
 	mNew.matrix[1][0] = multiplier;
 	mNew.matrix[1][1] = 1;
+	mNew.matrix[1][2] = 0;
+	mNew.matrix[2][0] = 0;
+	mNew.matrix[2][1] = 0;
+	mNew.matrix[2][2] = 1;
 
-	return mNew**this;
+	return mNew*myVector;
 
 }
 
-SquareMatrix SquareMatrix::horizontalFlip(double multiplier) const{
+std::vector<double> SquareMatrix::horizontalFlip(std::vector<double> myVector){
 
-	if (dimension != 2){
-		std::cout << "Error: Must be a 2-dimensional matrix" << std::endl;
-		return *this;
+	if (myVector.size() != 3){
+		std::cout << "Error: Must be a 3-dimensional vector" << std::endl;
+		return std::vector < double > {0, 0, 0};
 	}
 
-	SquareMatrix mNew(dimension);
+	SquareMatrix mNew(3);
 
 	mNew.matrix[0][0] = -1;
 	mNew.matrix[0][1] = 0;
+	mNew.matrix[0][2] = 0;
 	mNew.matrix[1][0] = 0;
 	mNew.matrix[1][1] = 1;
+	mNew.matrix[1][2] = 0;
+	mNew.matrix[2][0] = 0;
+	mNew.matrix[2][1] = 0;
+	mNew.matrix[2][2] = 1;
 
-	return mNew**this;
+	return mNew*myVector;
 
 }
 
-SquareMatrix SquareMatrix::verticalFlip(double multiplier) const{
+std::vector<double> SquareMatrix::verticalFlip(std::vector<double> myVector){
 
-	if (dimension != 2){
-		std::cout << "Error: Must be a 2-dimensional matrix" << std::endl;
-		return *this;
+	if (myVector.size() != 3){
+		std::cout << "Error: Must be a 3-dimensional vector" << std::endl;
+		return std::vector < double > {0, 0, 0};
 	}
 
-	SquareMatrix mNew(dimension);
+	SquareMatrix mNew(3);
 
 	mNew.matrix[0][0] = 1;
 	mNew.matrix[0][1] = 0;
+	mNew.matrix[0][2] = 0;
 	mNew.matrix[1][0] = 0;
 	mNew.matrix[1][1] = -1;
+	mNew.matrix[1][2] = 0;
+	mNew.matrix[2][0] = 0;
+	mNew.matrix[2][1] = 0;
+	mNew.matrix[2][2] = 1;
 
-	return mNew**this;
+	return mNew*myVector;
 
 }
 
-SquareMatrix SquareMatrix::squeezeMap(double multiplier) const{
+std::vector<double> SquareMatrix::squeezeMap(double multiplier,
+	std::vector<double> myVector){
 
-	if (dimension != 2){
-		std::cout << "Error: Must be a 2-dimensional matrix" << std::endl;
-		return *this;
+	if (myVector.size() != 3){
+		std::cout << "Error: Must be a 3-dimensional vector" << std::endl;
+		return std::vector < double > {0, 0, 0};
 	}
 	else if (multiplier == 0){
-		std::cout << "Error: Must be a non-zero parameter" << std::endl;
-		return *this;
+		std::cout << "Error: Multiplier must be non-zero" << std::endl;
+		return std::vector < double > {0, 0, 0};
 	}
 
-	SquareMatrix mNew(dimension);
+	SquareMatrix mNew(3);
 
 	mNew.matrix[0][0] = multiplier;
 	mNew.matrix[0][1] = 0;
+	mNew.matrix[0][2] = 0;
 	mNew.matrix[1][0] = 0;
-	mNew.matrix[1][1] = 1 / multiplier;
+	mNew.matrix[1][1] = 1/multiplier;
+	mNew.matrix[1][2] = 0;
+	mNew.matrix[2][0] = 0;
+	mNew.matrix[2][1] = 0;
+	mNew.matrix[2][2] = 1;
 
-	return mNew**this;
+	return mNew*myVector;
 
 }
 
-SquareMatrix SquareMatrix::rotation(double angle) const{
+std::vector<double> SquareMatrix::rotation(double angle,
+	std::vector<double> myVector){
 
-	if (dimension != 2){
-		std::cout << "Error: Must be a 2-dimensional matrix" << std::endl;
-		return *this;
-	}
-	else if (fmod(angle, 360) == 0){
-		std::cout << "No rotation took place; returning original..." << std::endl;
-		return *this;
+	if (myVector.size() != 3){
+		std::cout << "Error: Must be a 3-dimensional vector" << std::endl;
+		return std::vector < double > {0, 0, 0};
 	}
 
-	angle *= atan(1.0) * 4 / 180;
+	angle = fmod(angle, 360);
 
-	SquareMatrix mNew(dimension);
+	SquareMatrix mNew(3);
 
 	mNew.matrix[0][0] = cos(angle);
-	mNew.matrix[0][1] = -sin(angle);
-	mNew.matrix[1][0] = sin(angle);
+	mNew.matrix[0][1] = sin(angle);
+	mNew.matrix[0][2] = 0;
+	mNew.matrix[1][0] = -sin(angle);
 	mNew.matrix[1][1] = cos(angle);
+	mNew.matrix[1][2] = 0;
+	mNew.matrix[2][0] = 0;
+	mNew.matrix[2][1] = 0;
+	mNew.matrix[2][2] = 1;
 
-	return mNew**this;
+	return mNew*myVector;
 
 }
 
@@ -582,16 +662,28 @@ SquareMatrix SquareMatrix::rowEchelon() const{
 	}
 
 	if (temp.matrix[dimension - 1][dimension - 1] != 0)
-		temp.matrix[dimension - 1][dimension - 1] /= temp.matrix[dimension - 1][dimension - 1];
+		temp.matrix[dimension - 1][dimension - 1]
+			/= temp.matrix[dimension - 1][dimension - 1];
+
+	for (int i = 0; i < temp.dimension; ++i){
+		for (int j = 0; j < dimension; j++){
+			if (temp.matrix[i][j] != 1){
+				continue;
+			}
+			else if (i != j){
+				temp.rowSwap(i + 1, j + 1);
+			}
+		}
+	}
 
 	return temp;
 
 }
 
-SquareMatrix SquareMatrix::reducedRowEchelon() const{
+SquareMatrix SquareMatrix::rowReducedEchelon() const{
 
 	SquareMatrix temp = rowEchelon();
-	SquareMatrix tempT = temp.Transpose();
+	SquareMatrix tempT = temp.transpose();
 	return tempT.rowEchelon();
 	
 }
@@ -609,7 +701,8 @@ double SquareMatrix::getDeterminant(){
 	double determinant = 0;
 
 	for (int i = 0; i < dimension; ++i){
-		determinant += matrix[0][i] * Submatrix(1, i + 1).getDeterminant() * pow(-1, i);
+		determinant += matrix[0][i] * submatrix(1, i + 1).getDeterminant()
+			* pow(-1, i);
 	}
 
 	return determinant;
@@ -618,7 +711,7 @@ double SquareMatrix::getDeterminant(){
 
 bool SquareMatrix::isLinearlyIndependent(){
 
-	SquareMatrix temp = reducedRowEchelon();
+	SquareMatrix temp = rowReducedEchelon();
 	for (int i = 0; i < temp.dimension; ++i){
 		if (temp.matrix[i][i] != 1){
 			return false;
@@ -643,7 +736,7 @@ SquareMatrix SquareMatrix::inverse(){
 
 	for (int i = 0; i < dimension; ++i){
 		for (int j = 0; j < dimension; ++j){
-			minors.matrix[i][j] = Submatrix(i + 1, j + 1).getDeterminant();
+			minors.matrix[i][j] = submatrix(i + 1, j + 1).getDeterminant();
 			if (i % 2 == 0){
 				minors.matrix[i][j] *= pow(-1, j);
 			}
@@ -656,36 +749,39 @@ SquareMatrix SquareMatrix::inverse(){
 	//calculate adjoint (adjugate)
 	//multiply by 1/determinant
 	//return this inverse
-	return minors.Transpose()*(1/getDeterminant());
+	return minors.transpose()*(1/getDeterminant());
 
 }
 
 std::vector<double> SquareMatrix::xVec(std::vector<double> bVec){
 
 	SquareMatrix temp = *this;
-	std::vector<double> xVector(dimension, 0);
+	std::vector<double> xVector(temp.dimension, 0);
 
 	//A^-1*b
 	if (getDeterminant() != 0){
 		SquareMatrix temp = *this;
 		return temp.inverse()*bVec;
 	}
-	else if (dimension != bVec.size()){
+	else if (temp.dimension != bVec.size()){
 		std::cout << "Error: incompatible dimensions" << std::endl;
 		return xVector;
 	}
 	else if (bVec.size() == 1 && bVec[0] == 0){
 		xVector.resize(1);
+		if (temp(1, 1) == 0){
+			std::cout << "Any solution works." << std::endl;
+		}
 		xVector[0] = 0;
 		return xVector;
 	}
 
 	//row reduces the matrix temp.
-	for (int i = 0; i < dimension - 1; ++i){
+	for (int i = 0; i < temp.dimension - 1; ++i){
 
 		//swaps the rows if pivot point is zero
 		if (temp.matrix[i][i] == 0){
-			for (int k = i + 1; k < dimension; ++k){
+			for (int k = i + 1; k < temp.dimension; ++k){
 				if (temp.matrix[k][i] != 0){
 					temp.rowSwap(k + 1, i + 1);
 					std::swap(bVec[k], bVec[i]);
@@ -695,7 +791,7 @@ std::vector<double> SquareMatrix::xVec(std::vector<double> bVec){
 		}
 
 		//multiplies entire row by reciprocal of pivot.
-		for (int j = i; j < dimension; ++j){
+		for (int j = i; j < temp.dimension; ++j){
 			if (temp.matrix[j][i] != 0){
 				//bVec[j] reassignment MUST go before
 				//temp reassignment.
@@ -705,7 +801,7 @@ std::vector<double> SquareMatrix::xVec(std::vector<double> bVec){
 		}
 
 		//subtracts rows from each other
-		for (int j = i + 1; j < dimension; ++j){
+		for (int j = i + 1; j < temp.dimension; ++j){
 			if (temp.matrix[j][i] != 0){
 				temp.rowNeg(j + 1, i + 1);
 				bVec[j] -= bVec[i];
@@ -716,31 +812,45 @@ std::vector<double> SquareMatrix::xVec(std::vector<double> bVec){
 
 	if (temp.matrix[dimension - 1][dimension - 1] != 0){
 		bVec[dimension - 1] /= temp.matrix[dimension - 1][dimension - 1];
-		temp.matrix[dimension - 1][dimension - 1] /= temp.matrix[dimension - 1][dimension - 1];
+		temp.matrix[dimension - 1][dimension - 1] 
+			/= temp.matrix[dimension - 1][dimension - 1];
+	}
+
+	//(inefficient) bubble-sort algorithm to 
+	//place the pivots where they belong
+	for (int i = 0; i < temp.dimension; ++i){
+		for (int j = 0; j < dimension; j++){
+			if (temp.matrix[i][j] != 1){
+				continue;
+			}
+			else if (i != j){
+				temp.rowSwap(i + 1, j + 1);
+			}
+		}
 	}
 
 	//matrix A is row-reduced and b is consistent with these operations
 	//now we are ready for back substitution
 
 	//the last index
-	int start = dimension - 1;
+	int start = temp.dimension - 1;
 
-	for (int k = 0; k < dimension; ++k){
+	for (int k = 0; k < temp.dimension; ++k){
 		double restOfRowValue = 0;
 		int counter = 0;
 		//detects if equation has a free variable.
 		if (bVec[start - k] == 0){
-			for (int i = 0; i < dimension; ++i){
+			for (int i = 0; i < temp.dimension; ++i){
 				if (temp.matrix[start - k][i] == 0){
 					++counter;
 				}
 				else
 					break;
 			}
-			if (counter == dimension){
+			if (counter == temp.dimension){
 				std::cout << "x_" << start - k + 1 << " is free;";
-				std::cout << " setting it equal to zero..." << std::endl;
-				xVector[start - k] = 0;
+				std::cout << " setting it equal to one..." << std::endl;
+				xVector[start - k] = 1;
 				continue;
 			}
 		}
@@ -749,7 +859,7 @@ std::vector<double> SquareMatrix::xVec(std::vector<double> bVec){
 		else if (temp.matrix[start - k][start - k] == 0){
 			std::cout << "Inconsistent system detected;";
 			std::cout << " matrix has only trivial solution." << std::endl;
-			std::vector<double> newVec(dimension, 0);
+			std::vector<double> newVec(temp.dimension, 0);
 			return newVec;
 		}
 
@@ -764,6 +874,11 @@ std::vector<double> SquareMatrix::xVec(std::vector<double> bVec){
 
 	return xVector;
 
+}
+
+std::vector<double> SquareMatrix::nullSpace(){
+	std::vector<double> nullVec(dimension, 0);
+	return xVec(nullVec);
 }
 
 /*std::vector<SquareMatrix> SquareMatrix::factorLU(){
