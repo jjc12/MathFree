@@ -7,6 +7,7 @@
 #include <fstream>
 #include <algorithm>
 #include <string>
+#include <cmath>
 
 class SquareMatrix{
 
@@ -20,7 +21,9 @@ class SquareMatrix{
 
 		// constructor for a matrix
 		//initializes everything to zero.
-		explicit SquareMatrix(int size = 1);
+		explicit SquareMatrix(int dimension = 1);
+		explicit SquareMatrix(double&& dimension) = delete;
+		explicit SquareMatrix(float&& dimension) = delete;
 
 		//copy constructor
 		SquareMatrix(const SquareMatrix& m);
@@ -53,13 +56,13 @@ class SquareMatrix{
 		void fileInput(std::string filename);
 
 		//displays the matrix on the console
-		void Show() const;
+		void show() const;
 
 		//gets dimension of matrix
 		int getDimension() const;
 
 		//returns transpose
-		SquareMatrix Transpose() const;
+		SquareMatrix transpose() const;
 
 		//row operations; multiplier multiplies rownum2 and performs
 		//a specific operation and modifies the SAME matrix.
@@ -69,19 +72,27 @@ class SquareMatrix{
 		SquareMatrix& rowSwap(int rownum1, int rownum2);
 
 		//obtain submatrix by eliminating row, column
-		SquareMatrix Submatrix(int row, int column) const;
+		SquareMatrix submatrix(int row, int column) const;
 
-		//transformations for 2d matrices
-		SquareMatrix horizontalShear(double multiplier) const;
-		SquareMatrix verticalShear(double multiplier) const;
-		SquareMatrix horizontalFlip(double multiplier) const;
-		SquareMatrix verticalFlip(double multiplier) const;
-		SquareMatrix squeezeMap(double multiplier) const;
-		SquareMatrix rotation(double angle) const;
+		//transformations for 2d vectors represented in homogenous co-ordinates
+		static std::vector<double>
+			translation(double x, double y, std::vector<double> myVector);
+		static std::vector<double>
+			horizontalShear(double multiplier, std::vector<double> myVector);
+		static std::vector<double> 
+			verticalShear(double multiplier, std::vector<double> myVector);
+		static std::vector<double> 
+			horizontalFlip(std::vector<double> myVector);
+		static std::vector<double> 
+			verticalFlip(std::vector<double> myVector);
+		static std::vector<double> 
+			squeezeMap(double multiplier, std::vector<double> myVector);
+		static std::vector<double> 
+			rotation(double angle, std::vector<double> myVector);
 
 		//row reduce the matrix
 		SquareMatrix rowEchelon() const;
-		SquareMatrix reducedRowEchelon() const;
+		SquareMatrix rowReducedEchelon() const;
 
 		//determinant for nxn square matrices
 		//calculates it recursively
@@ -98,6 +109,9 @@ class SquareMatrix{
 		//given an nx1 vector b
 		//calculates x-transpose in Ax = b
 		std::vector<double> xVec(std::vector<double> bVec);
+
+		//calculates the null space (kernel) of the matrix
+		std::vector<double> nullSpace();
 		
 
 		//LU-factorization
