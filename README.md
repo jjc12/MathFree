@@ -28,13 +28,6 @@ SquareMatrix is a class written to manipulate nxn (square) matrices.
 - Test whether the matrix is linearly independent or not
 - Solve Ax = b
 
-Updates (should go in wiki/updates):
-
-3/19/2015 
-Create README.md file.  
-Upload squarematrix_free.h file to MatrixFree library.  
-Upload squarematrix_free.cpp file to MatrixFree library.  
-
 ## Show me the source code! (And how do I use it?)
 
 The source code and header files for your preferred object can be found at <a href="https://github.com/jjc12/MathFree/tree/master">branch: master</a>.
