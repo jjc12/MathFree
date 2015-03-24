@@ -53,7 +53,7 @@ class SquareMatrix{
 
 		//allows the user to input values into the matrix.
 		void consoleInput();
-		void fileInput(std::string filename);
+		void fileInput(const std::string& filename);
 
 		//displays the matrix on the console
 		void show() const;
@@ -76,19 +76,19 @@ class SquareMatrix{
 
 		//transformations for 2d vectors represented in homogenous co-ordinates
 		static std::vector<double>
-			translation(double x, double y, std::vector<double> myVector);
+			translation(double x, double y, const std::vector<double>& myVector);
 		static std::vector<double>
-			horizontalShear(double multiplier, std::vector<double> myVector);
+			horizontalShear(double multiplier, const std::vector<double>& myVector);
 		static std::vector<double> 
-			verticalShear(double multiplier, std::vector<double> myVector);
+			verticalShear(double multiplier, const std::vector<double>& myVector);
 		static std::vector<double> 
-			horizontalFlip(std::vector<double> myVector);
+			horizontalFlip(const std::vector<double>& myVector);
 		static std::vector<double> 
-			verticalFlip(std::vector<double> myVector);
+			verticalFlip(const std::vector<double>& myVector);
 		static std::vector<double> 
-			squeezeMap(double multiplier, std::vector<double> myVector);
+			squeezeMap(double multiplier, const std::vector<double>& myVector);
 		static std::vector<double> 
-			rotation(double angle, std::vector<double> myVector);
+			rotation(double angle, const std::vector<double>& myVector);
 
 		//row reduce the matrix
 		SquareMatrix rowEchelon() const;
