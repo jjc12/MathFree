@@ -7,36 +7,45 @@ void SquareMatrix::helperFunc(std::string &strnum){
 	int bad = 0;
 	int watchout = 0;
 	int strsize = strnum.size();
-
-	for (int i = 0; i < strsize; ++i){
-		if (!((isdigit(strnum[i])) || (strnum[i] == '.'))){
-			bad = 1;
-			if ((strnum[0] == '-') && (1 < strsize)){
-				for (int j = 1; j < strsize; ++j){
-					if (strnum[j] == '-'){
-						goto label;
-					}
-				}
-				bad = 0;
-				continue;
+	
+	//if the first character is a hyphen and the size is greater
+	//than one
+	if (strnum[0] == '-' && 1 < strsize){
+		for (int j = 1; j < strsize; ++j){
+			if (strnum[j] == '-'){
+				bad = 1;
 			}
-		label:
+		}
+	}
+
+	//this runs for length of string
+	for (int i = 0; i < strsize; ++i){
+		//if the current character is not a digit or a period
+		if (!(isdigit(strnum[i]) || strnum[i] == '.')){
+			//this is an invalid input.
+			bad = 1;
 			break;
 		}
+
 		if (strnum[i] == '.'){
 			++watchout;
 			if (watchout == 2){
 				break;
 			}
 		}
+
+		//end of iteration of for loop
+
 	}
 
-	if ((bad == 1) || (2 == watchout)){
+	//if bad = 1 or watchout = 2, redirects you to the beginning of the function.
+	if (bad == 1 || 2 == watchout){
 		std::cout << "Invalid input; please enter numbers. Try again: ";
 		std::cin >> tryagain;
 		helperFunc(tryagain); 
 		strnum = tryagain;
 	}
+
 	return;
 }
 
