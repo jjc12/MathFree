@@ -13,20 +13,11 @@ SquareMatrix is a class written to manipulate nxn (square) matrices.
 
 ##### Demonstration 
 
+[] We need to add a video.
+
 ##### Features 
 
-- Construct a matrix object of size nxn
-- Read in values from a file or the console
-- Add, subtract, and multiply a matrix with other matrices
-- Add, subtract, multiply, and swap rows in a matrix
-- Change or obtain individual values
-- Obtain a submatrix
-- Perform transformations on a 2x2 matrix
-- Get the reduced (or row reduced) form
-- Get a determinant
-- Obtain an inverse
-- Test whether the matrix is linearly independent or not
-- Solve Ax = b
+A full list of features can be found [here](https://github.com/jjc12/MathFree/wiki/MatrixFree).
 
 ## Show me the source code! (And how do I use it?)
 
