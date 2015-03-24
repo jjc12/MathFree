@@ -1,5 +1,3 @@
-
-
 # MathFree
 
 MathFree is a free, open-source C++ library that includes files written to manipulate the following mathematics-based
