@@ -297,7 +297,7 @@ void SquareMatrix::consoleInput(){ //inputs for the nxn matrix.
 }
 
 //inputs for the nxn matrix.
-void SquareMatrix::fileInput(std::string filename){
+void SquareMatrix::fileInput(const std::string& filename){
 
 	std::string acoeff;
 	int rowCounter = 0;
@@ -467,7 +467,7 @@ SquareMatrix SquareMatrix::submatrix(int row, int column) const{
 }
 
 std::vector<double> SquareMatrix::translation(double x, double y,
-	std::vector<double> myVector){
+	const std::vector<double>& myVector){
 
 	if (myVector.size() != 3){
 		std::cout << "Error: Must be a 3-dimensional vector" << std::endl;
@@ -490,7 +490,7 @@ std::vector<double> SquareMatrix::translation(double x, double y,
 }
 
 std::vector<double> SquareMatrix::horizontalShear(double multiplier,
-	std::vector<double> myVector){
+	const std::vector<double>& myVector){
 
 	if (myVector.size() != 3){
 		std::cout << "Error: Must be a 3-dimensional vector" << std::endl;
@@ -514,7 +514,7 @@ std::vector<double> SquareMatrix::horizontalShear(double multiplier,
 }
 
 std::vector<double> SquareMatrix::verticalShear(double multiplier,
-	std::vector<double> myVector){
+	const std::vector<double>& myVector){
 
 	if (myVector.size() != 3){
 		std::cout << "Error: Must be a 3-dimensional vector" << std::endl;
@@ -537,7 +537,7 @@ std::vector<double> SquareMatrix::verticalShear(double multiplier,
 
 }
 
-std::vector<double> SquareMatrix::horizontalFlip(std::vector<double> myVector){
+std::vector<double> SquareMatrix::horizontalFlip(const std::vector<double>& myVector){
 
 	if (myVector.size() != 3){
 		std::cout << "Error: Must be a 3-dimensional vector" << std::endl;
@@ -560,7 +560,7 @@ std::vector<double> SquareMatrix::horizontalFlip(std::vector<double> myVector){
 
 }
 
-std::vector<double> SquareMatrix::verticalFlip(std::vector<double> myVector){
+std::vector<double> SquareMatrix::verticalFlip(const std::vector<double>& myVector){
 
 	if (myVector.size() != 3){
 		std::cout << "Error: Must be a 3-dimensional vector" << std::endl;
@@ -584,7 +584,7 @@ std::vector<double> SquareMatrix::verticalFlip(std::vector<double> myVector){
 }
 
 std::vector<double> SquareMatrix::squeezeMap(double multiplier,
-	std::vector<double> myVector){
+	const std::vector<double>& myVector){
 
 	if (myVector.size() != 3){
 		std::cout << "Error: Must be a 3-dimensional vector" << std::endl;
@@ -612,7 +612,7 @@ std::vector<double> SquareMatrix::squeezeMap(double multiplier,
 }
 
 std::vector<double> SquareMatrix::rotation(double angle,
-	std::vector<double> myVector){
+	const std::vector<double>& myVector){
 
 	if (myVector.size() != 3){
 		std::cout << "Error: Must be a 3-dimensional vector" << std::endl;
