@@ -22,7 +22,7 @@ void SquareMatrix::helperFunc(std::string &strnum){
 		}
 	}
 
-	//if bad = 1 or watchout = 2, redirects you to the beginning of the function.
+	//if bad = 1 or watchout <= 2, redirects you to the beginning of the function.
 	if (bad == 1 || 2 <= watchout){
 		std::cout << "Invalid input; please enter numbers. Try again: ";
 		std::cin >> tryagain;
