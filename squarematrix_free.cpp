@@ -8,34 +8,18 @@ void SquareMatrix::helperFunc(std::string &strnum){
 	int watchout = 0;
 	int strsize = strnum.size();
 	
-	//if the first character is a hyphen and the size is greater
-	//than one
-	if (strnum[0] == '-' && 1 < strsize){
-		for (int j = 1; j < strsize; ++j){
-			if (strnum[j] == '-'){
-				bad = 1;
-			}
-		}
-	}
-
-	//this runs for length of string
-	for (int i = 0; i < strsize; ++i){
-		//if the current character is not a digit or a period
-		if (!(isdigit(strnum[i]) || strnum[i] == '.')){
-			//this is an invalid input.
+	//if invalid number
+	for (int j = 0; j < strsize; ++j){
+		//if first digit is not a '-' or a '.' or if any digit after that
+		//is not a period otherwise invalid. if two periods detected, invalid.
+		if ((j == 0 && !isdigit(strnum[j]) && !(strnum[j] == '-')
+			&& !(strnum[j] == '.')) || (j != 0 
+			&& !isdigit(strnum[j]) && !(strnum[j] == '.'))){
 			bad = 1;
-			break;
 		}
-
-		if (strnum[i] == '.'){
+		if (strnum[j] == '.'){
 			++watchout;
-			if (watchout == 2){
-				break;
-			}
 		}
-
-		//end of iteration of for loop
-
 	}
 
 	//if bad = 1 or watchout = 2, redirects you to the beginning of the function.
