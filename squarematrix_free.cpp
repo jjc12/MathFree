@@ -61,7 +61,7 @@ SquareMatrix::SquareMatrix(const SquareMatrix& m){
 
 	//in case copy constructor copies to itself.
 	if (&m == this){
-		this->dimension = 1;
+		dimension = 1;
 	}
 	else{
 		dimension = m.dimension;
