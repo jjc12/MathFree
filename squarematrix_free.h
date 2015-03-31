@@ -10,6 +10,8 @@
 #include <cmath>
 
 class SquareMatrix{
+	
+	friend std::ostream& operator<<(std::ostream& s, SquareMatrix m);
 
 	private:
 
