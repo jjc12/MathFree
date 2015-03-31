@@ -30,7 +30,7 @@ class SquareMatrix{
 		SquareMatrix(const SquareMatrix& m);
 
 		//assignment operator overload
-		SquareMatrix operator=(const SquareMatrix& m);
+		SquareMatrix& operator=(const SquareMatrix& m);
 
 		//accessor operator overload
 		//gets value at position - NOT index
