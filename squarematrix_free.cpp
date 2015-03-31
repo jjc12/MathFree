@@ -269,7 +269,7 @@ void SquareMatrix::consoleInput(){ //inputs for the nxn matrix.
 	int rowCounter = 0;
 
 	do {
-		std::cout << "Enter coefficients of linear equation "
+		std::cout << "Enter coefficients of linear expression "
 			<< rowCounter + 1 << ":" << std::endl;
 		for (int j = 0; j < dimension; ++j){
 			std::cin >> acoeff;
