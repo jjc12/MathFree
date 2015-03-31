@@ -86,20 +86,21 @@ SquareMatrix::SquareMatrix(const SquareMatrix& m){
 }
 
 //sets two matrices equal (deep copy)
-SquareMatrix SquareMatrix::operator=(const SquareMatrix& m){
-
-	std::cout << "The copy constructor runs";
+SquareMatrix& SquareMatrix::operator=(const SquareMatrix& m){
 
 	dimension = m.dimension;
-	SquareMatrix rM(dimension);
+	
+	//clear the original matrix
+	matrix.clear();
+	matrix.resize(dimension, std::vector<double>(dimension));
 
 	for (int i = 0; i < dimension; i++){
 		for (int j = 0; j < dimension; j++){
-			rM.matrix[i][j] = m.matrix[i][j];
+			matrix[i][j] = m.matrix[i][j];
 		}
 	}
 
-	return rM;
+	return *this;
 
 }
 
