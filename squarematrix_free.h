@@ -24,6 +24,7 @@ class SquareMatrix{
 		explicit SquareMatrix(int dimension = 1);
 		explicit SquareMatrix(double&& dimension) = delete;
 		explicit SquareMatrix(float&& dimension) = delete;
+		explicit SquareMatrix(char&& dimension) = delete;
 
 		//copy constructor
 		SquareMatrix(const SquareMatrix& m);
