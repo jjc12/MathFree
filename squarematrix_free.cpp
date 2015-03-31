@@ -2,6 +2,25 @@
 
 #include "squarematrix_free.h"
 
+std::ostream& operator<<(std::ostream& s, SquareMatrix m){
+
+	std::cout << "[";
+
+	for (int i = 0; i < m.dimension; ++i){ //output of matrix
+		for (int j = 0; j < m.dimension; ++j){
+			std::cout << m.matrix[i][j];
+			if (j != m.dimension - 1)
+				 std::cout << ", ";
+		}
+		if (i != m.dimension - 1)
+			std::cout << "; ";
+	}
+	std::cout << "]" << std::endl;
+
+	return s;
+
+}
+
 void SquareMatrix::helperFunc(std::string &strnum){
 	std::string tryagain;
 	int bad = 0;
