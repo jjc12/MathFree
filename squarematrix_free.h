@@ -36,12 +36,12 @@ class SquareMatrix{
 
 		//accessor operator overload
 		//gets value at position - NOT index
-		//returns value 0 if out of bounds.
+		//returns value at row 1, column 1 if out of bounds
 		const double& operator()(int i, int j) const;
 
 		//mutator operator overload
 		//sets value at position - NOT index
-		//returns false if out of bounds.
+		//modifies value at row 1, column 1 if out of bounds
 		double& operator()(int i, int j);
 
 		//other operator overloads.
