@@ -27,7 +27,7 @@ The source code and header files for your preferred object can be found at <a hr
 
 ### Found a bug?
 
-If a bug is found, please submit an e-mail to jjc12@my.fsu.edu with the subject: "BUG: *your one line description of the bug*". This project is my priority so expect bugs to disappear **as soon as possible**.
+If a bug is found, or you believe you are obtaining incorrect answers, please submit an e-mail to jjc12@my.fsu.edu with the subject: "BUG: *your one line description of the bug*". Not only is this project new, but it is also my priority so expect bugs to disappear **as soon as I'm aware of them**.
 
 ### Can't work through an issue?
 
