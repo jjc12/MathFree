@@ -15,7 +15,7 @@ std::ostream& operator<<(std::ostream& s, SquareMatrix m){
 		if (i != m.dimension - 1)
 			std::cout << "; ";
 	}
-	std::cout << "]" << std::endl;
+	std::cout << "]";
 
 	return s;
 
