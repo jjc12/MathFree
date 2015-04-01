@@ -696,8 +696,19 @@ SquareMatrix SquareMatrix::rowEchelon() const{
 SquareMatrix SquareMatrix::rowReducedEchelon() const{
 
 	SquareMatrix temp = rowEchelon();
-	SquareMatrix tempT = temp.transpose();
-	return tempT.rowEchelon();
+
+	//back substitution
+
+	for (int i = dimension - 1; 1 <= i; --i){
+		for (int j = i - 1; 0 <= j; --j){
+			if (matrix[i][i] != 0 && matrix[j][i] != 0){
+				temp.rowNeg(j + 1, i + 1, matrix[j][i]);
+			}
+		}
+	}
+	
+
+	return temp;
 	
 }
 
