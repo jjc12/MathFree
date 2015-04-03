@@ -75,6 +75,10 @@ SquareMatrix::SquareMatrix(int dimension){ //constructs a size-by-size matrix.
 
 }
 
+SquareMatrix::~SquareMatrix(){
+	
+}
+
 //copy constructs a size-by-size matrix.
 SquareMatrix::SquareMatrix(const SquareMatrix& m){
 
