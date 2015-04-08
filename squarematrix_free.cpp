@@ -757,6 +757,11 @@ SquareMatrix SquareMatrix::inverse(){
 			<< std::endl;
 		return *this;
 	}
+	else if (dimension == 1){
+		SquareMatrix temp;
+		temp(1, 1) = 1 / matrix[0][0];
+		return temp;
+	}
 
 	//calculate minors
 	//also calculate cofactors
