@@ -127,7 +127,7 @@ SquareMatrix& SquareMatrix::operator=(const SquareMatrix& m){
 
 }
 
-bool SquareMatrix::operator==(const SquareMatrix& m){
+bool SquareMatrix::operator==(const SquareMatrix& m) const{
 	if (matrix != m.matrix){
 		return false;
 	}
