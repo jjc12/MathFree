@@ -127,6 +127,15 @@ SquareMatrix& SquareMatrix::operator=(const SquareMatrix& m){
 
 }
 
+bool SquareMatrix::operator==(const SquareMatrix& m){
+	if (matrix != m.matrix){
+		return false;
+	}
+	else{
+		return true;
+	}
+}
+
 const double& SquareMatrix::operator()(int i, int j) const{
 
 	if (i < 1 || dimension < i){
