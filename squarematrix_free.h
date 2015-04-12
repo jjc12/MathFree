@@ -36,6 +36,9 @@ class SquareMatrix{
 
 		//assignment operator overload
 		SquareMatrix& operator=(const SquareMatrix& m);
+		//comparison operator overload
+		bool operator==(const SquareMatrix& m);
+		
 
 		//accessor operator overload
 		//gets value at position - NOT index
