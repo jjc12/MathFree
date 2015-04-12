@@ -37,7 +37,7 @@ class SquareMatrix{
 		//assignment operator overload
 		SquareMatrix& operator=(const SquareMatrix& m);
 		//comparison operator overload
-		bool operator==(const SquareMatrix& m);
+		bool operator==(const SquareMatrix& m) const;
 		
 
 		//accessor operator overload
