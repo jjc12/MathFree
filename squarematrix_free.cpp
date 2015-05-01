@@ -833,7 +833,6 @@ std::vector<double> SquareMatrix::xVec(std::vector<double> bVec){
 
 	//A^-1*b
 	if (getDeterminant() != 0){
-		SquareMatrix temp = *this;
 		return temp.inverse()*bVec;
 	}
 	else if (temp.dimension != bVec.size()){
