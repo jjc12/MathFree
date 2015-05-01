@@ -25,7 +25,7 @@ std::ostream& operator<<(std::ostream& s, std::vector<double> v){
 
 	std::cout << "[";
 
-	for (int i = 0; i < v.size(); ++i){ //output of matrix
+	for (unsigned i = 0; i < v.size(); ++i){ //output of matrix
 		std::cout << v[i];
 		if (i != v.size() - 1)
 			std::cout << ", ";
