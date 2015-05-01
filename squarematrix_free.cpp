@@ -21,6 +21,19 @@ std::ostream& operator<<(std::ostream& s, SquareMatrix m){
 
 }
 
+std::ostream& operator<<(std::ostream& s, std::vector<double> v){
+
+	std::cout << "[";
+
+	for (int i = 0; i < v.size(); ++i){ //output of matrix
+		std::cout << v[i];
+		if (i != v.size() - 1)
+			std::cout << ", ";
+	}
+	std::cout << "]";
+
+}
+
 void SquareMatrix::helperFunc(std::string &strnum){
 	std::string tryagain;
 	int bad = 0;
