@@ -32,6 +32,8 @@ std::ostream& operator<<(std::ostream& s, std::vector<double> v){
 	}
 	std::cout << "]";
 
+	return s;
+	
 }
 
 void SquareMatrix::helperFunc(std::string &strnum){
