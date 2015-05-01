@@ -10,121 +10,131 @@
 #include <cmath>
 
 class SquareMatrix{
-	
+
 	friend std::ostream& operator<<(std::ostream& s, SquareMatrix m);
 	friend std::ostream& operator<<(std::ostream& s, std::vector<double> v);
 
-	private:
+private:
 
-		int dimension; // size of matrix
-		std::vector< std::vector<double> > matrix; // the coefficient matrix
-		void helperFunc(std::string &strnum); // helper function for correct input.
+	// size of matrix
+	int dimension;
 
-	public:
+	// the coefficient matrix
+	std::vector< std::vector<double> > matrix; 
 
-		// constructor for a matrix
-		//initializes everything to zero.
-		explicit SquareMatrix(int dimension = 1);
-		explicit SquareMatrix(double&& dimension) = delete;
-		explicit SquareMatrix(float&& dimension) = delete;
-		explicit SquareMatrix(char&& dimension) = delete;
+	// helper function for correct input.
+	void helperFunc(std::string &strnum);
 
-		//destructor
-		~SquareMatrix();
-		
-		//copy constructor
-		SquareMatrix(const SquareMatrix& m);
+	// helper function to change numbers of magnitude <1e-12 to zero.
+	void changeToZerosIfNeeded(SquareMatrix&);
+	//tolerance for said change
+	const double tolerance = 1e-12;
 
-		//assignment operator overload
-		SquareMatrix& operator=(const SquareMatrix& m);
-		//comparison operator overload
-		bool operator==(const SquareMatrix& m) const;
-		
+public:
 
-		//accessor operator overload
-		//gets value at position - NOT index
-		//returns value at row 1, column 1 if out of bounds
-		const double& operator()(int i, int j) const;
+	// constructor for a matrix
+	//initializes everything to zero.
+	explicit SquareMatrix(int dimension = 1);
+	explicit SquareMatrix(double&& dimension) = delete;
+	explicit SquareMatrix(float&& dimension) = delete;
+	explicit SquareMatrix(char&& dimension) = delete;
 
-		//mutator operator overload
-		//sets value at position - NOT index
-		//modifies value at row 1, column 1 if out of bounds
-		double& operator()(int i, int j);
+	//destructor
+	~SquareMatrix();
 
-		//other operator overloads.
-		SquareMatrix operator+(const SquareMatrix& matrix2) const;
-		SquareMatrix& operator+=(const SquareMatrix& matrix2);
-		SquareMatrix operator-(const SquareMatrix& matrix2) const;
-		SquareMatrix& operator-=(const SquareMatrix& matrix2);
-		SquareMatrix operator*(double scalar);
-		SquareMatrix operator*(const SquareMatrix& matrix2) const;
-		std::vector<double> operator*(std::vector<double> vVec) const;
-		SquareMatrix& operator*=(const SquareMatrix& matrix2);
+	//copy constructor
+	SquareMatrix(const SquareMatrix& m);
 
-		//allows the user to input values into the matrix.
-		void consoleInput();
-		void fileInput(const std::string& filename);
+	//assignment operator overload
+	SquareMatrix& operator=(const SquareMatrix& m);
+	//comparison operator overload
+	bool operator==(const SquareMatrix& m) const;
 
-		//displays the matrix on the console
-		void show() const;
 
-		//gets dimension of matrix
-		int getDimension() const;
+	//accessor operator overload
+	//gets value at position - NOT index
+	//returns value at row 1, column 1 if out of bounds
+	const double& operator()(int i, int j) const;
 
-		//returns transpose
-		SquareMatrix transpose() const;
+	//mutator operator overload
+	//sets value at position - NOT index
+	//modifies value at row 1, column 1 if out of bounds
+	double& operator()(int i, int j);
 
-		//row operations; multiplier multiplies rownum2 and performs
-		//a specific operation and modifies the SAME matrix.
-		SquareMatrix& rowAdd(int rownum1, int rownum2, double multiplier = 1);
-		SquareMatrix& rowNeg(int rownum1, int rownum2, double multiplier = 1);
-		SquareMatrix& rowMul(int rownum1, double multiplier);
-		SquareMatrix& rowSwap(int rownum1, int rownum2);
+	//other operator overloads.
+	SquareMatrix operator+(const SquareMatrix& matrix2) const;
+	SquareMatrix& operator+=(const SquareMatrix& matrix2);
+	SquareMatrix operator-(const SquareMatrix& matrix2) const;
+	SquareMatrix& operator-=(const SquareMatrix& matrix2);
+	SquareMatrix operator*(double scalar);
+	SquareMatrix operator*(const SquareMatrix& matrix2) const;
+	std::vector<double> operator*(std::vector<double> vVec) const;
+	SquareMatrix& operator*=(const SquareMatrix& matrix2);
 
-		//obtain submatrix by eliminating row, column
-		SquareMatrix submatrix(int row, int column) const;
+	//allows the user to input values into the matrix.
+	void consoleInput();
+	void fileInput(const std::string& filename);
 
-		//transformations for 2d vectors represented in homogenous co-ordinates
-		static std::vector<double>
-			translation(double x, double y, const std::vector<double>& myVector);
-		static std::vector<double>
-			horizontalShear(double multiplier, const std::vector<double>& myVector);
-		static std::vector<double> 
-			verticalShear(double multiplier, const std::vector<double>& myVector);
-		static std::vector<double> 
-			horizontalFlip(const std::vector<double>& myVector);
-		static std::vector<double> 
-			verticalFlip(const std::vector<double>& myVector);
-		static std::vector<double> 
-			squeezeMap(double multiplier, const std::vector<double>& myVector);
-		static std::vector<double> 
-			rotation(double angle, const std::vector<double>& myVector);
+	//displays the matrix on the console
+	void show() const;
 
-		//row reduce the matrix
-		SquareMatrix rowEchelon() const;
-		SquareMatrix rowReducedEchelon() const;
+	//gets dimension of matrix
+	int getDimension() const;
 
-		//determinant for nxn square matrices
-		//calculates it recursively
-		double getDeterminant();
+	//returns transpose
+	SquareMatrix transpose() const;
 
-		//returns true if matrix contains L.I. columns
-		//false if a column is a multiple of another.
-		bool isLinearlyIndependent();
+	//row operations; multiplier multiplies rownum2 and performs
+	//a specific operation and modifies the SAME matrix.
+	SquareMatrix& rowAdd(int rownum1, int rownum2, double multiplier = 1);
+	SquareMatrix& rowNeg(int rownum1, int rownum2, double multiplier = 1);
+	SquareMatrix& rowMul(int rownum1, double multiplier);
+	SquareMatrix& rowSwap(int rownum1, int rownum2);
 
-		//calculates the inverse of matrix
-		//returns original if no inverse exists
-		SquareMatrix inverse();
+	//obtain submatrix by eliminating row, column
+	SquareMatrix submatrix(int row, int column) const;
 
-		//given an nx1 vector b
-		//calculates x-transpose in Ax = b
-		std::vector<double> xVec(std::vector<double> bVec);
+	//transformations for 2d vectors represented in homogenous co-ordinates
+	static std::vector<double>
+		translation(double x, double y, const std::vector<double>& myVector);
+	static std::vector<double>
+		horizontalShear(double multiplier, const std::vector<double>& myVector);
+	static std::vector<double>
+		verticalShear(double multiplier, const std::vector<double>& myVector);
+	static std::vector<double>
+		horizontalFlip(const std::vector<double>& myVector);
+	static std::vector<double>
+		verticalFlip(const std::vector<double>& myVector);
+	static std::vector<double>
+		squeezeMap(double multiplier, const std::vector<double>& myVector);
+	static std::vector<double>
+		rotation(double angle, const std::vector<double>& myVector);
 
-		//calculates the null space (kernel) of the matrix
-		std::vector<double> nullSpace();
-		
+	//row reduce the matrix
+	SquareMatrix rowEchelon();
+	SquareMatrix rowReducedEchelon();
 
-		//LU-factorization
-		//std::vector<SquareMatrix> factorLU();
+	//determinant for nxn square matrices
+	//calculates it recursively
+	double getDeterminant();
+
+	//returns true if matrix contains L.I. columns
+	//false if a column is a multiple of another.
+	bool isLinearlyIndependent();
+
+	//calculates the inverse of matrix
+	//returns original if no inverse exists
+	SquareMatrix inverse();
+
+	//given an nx1 vector b
+	//calculates x-transpose in Ax = b
+	std::vector<double> xVec(std::vector<double> bVec);
+
+	//calculates the null space (kernel) of the matrix
+	std::vector<double> nullSpace();
+
+
+	//LU-factorization
+	//std::vector<SquareMatrix> factorLU();
 
 };
