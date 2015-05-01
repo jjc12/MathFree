@@ -12,6 +12,7 @@
 class SquareMatrix{
 	
 	friend std::ostream& operator<<(std::ostream& s, SquareMatrix m);
+	friend std::ostream& operator<<(std::ostream& s, std::vector<double> v);
 
 	private:
 
