@@ -33,7 +33,7 @@ std::ostream& operator<<(std::ostream& s, std::vector<double> v){
 	std::cout << "]";
 
 	return s;
-	
+
 }
 
 void SquareMatrix::helperFunc(std::string &strnum){
@@ -65,6 +65,20 @@ void SquareMatrix::helperFunc(std::string &strnum){
 	}
 
 	return;
+}
+
+void SquareMatrix::changeToZerosIfNeeded(SquareMatrix& sm){
+
+	//changes values if they are below a certain tolerance (due to
+	//floating-point precision errors)
+	for (int i = 0; i < sm.dimension; ++i){
+		for (int j = 0; j < sm.dimension; ++j){
+			if (fabs(sm.matrix[i][j]) < tolerance){
+				sm.matrix[i][j] = 0;
+			}
+		}
+	}
+
 }
 
 
@@ -669,7 +683,7 @@ std::vector<double> SquareMatrix::rotation(double angle,
 
 }
 
-SquareMatrix SquareMatrix::rowEchelon() const{
+SquareMatrix SquareMatrix::rowEchelon(){
 
 	SquareMatrix temp = *this;
 
@@ -702,6 +716,8 @@ SquareMatrix SquareMatrix::rowEchelon() const{
 
 	}
 
+	changeToZerosIfNeeded(temp);
+
 	if (temp.matrix[dimension - 1][dimension - 1] != 0)
 		temp.matrix[dimension - 1][dimension - 1]
 			/= temp.matrix[dimension - 1][dimension - 1];
@@ -721,7 +737,7 @@ SquareMatrix SquareMatrix::rowEchelon() const{
 
 }
 
-SquareMatrix SquareMatrix::rowReducedEchelon() const{
+SquareMatrix SquareMatrix::rowReducedEchelon(){
 
 	SquareMatrix temp = rowEchelon();
 
@@ -867,10 +883,14 @@ std::vector<double> SquareMatrix::xVec(std::vector<double> bVec){
 
 	}
 
+	changeToZerosIfNeeded(temp);
+
 	if (temp.matrix[dimension - 1][dimension - 1] != 0){
+
 		bVec[dimension - 1] /= temp.matrix[dimension - 1][dimension - 1];
 		temp.matrix[dimension - 1][dimension - 1] 
 			/= temp.matrix[dimension - 1][dimension - 1];
+
 	}
 
 	//(inefficient) bubble-sort algorithm to 
@@ -893,6 +913,7 @@ std::vector<double> SquareMatrix::xVec(std::vector<double> bVec){
 	int start = temp.dimension - 1;
 
 	for (int k = 0; k < temp.dimension; ++k){
+
 		double restOfRowValue = 0;
 		int counter = 0;
 		//detects if equation has a free variable.
