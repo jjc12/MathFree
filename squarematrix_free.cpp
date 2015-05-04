@@ -6,7 +6,8 @@ std::ostream& operator<<(std::ostream& s, SquareMatrix m){
 
 	std::cout << "[";
 
-	for (int i = 0; i < m.dimension; ++i){ //output of matrix
+	//output of matrix
+	for (int i = 0; i < m.dimension; ++i){
 		for (int j = 0; j < m.dimension; ++j){
 			std::cout << m.matrix[i][j];
 			if (j != m.dimension - 1)
@@ -25,7 +26,8 @@ std::ostream& operator<<(std::ostream& s, std::vector<double> v){
 
 	std::cout << "[";
 
-	for (unsigned i = 0; i < v.size(); ++i){ //output of matrix
+	//output of matrix
+	for (unsigned i = 0; i < v.size(); ++i){
 		std::cout << v[i];
 		if (i != v.size() - 1)
 			std::cout << ", ";
@@ -36,7 +38,7 @@ std::ostream& operator<<(std::ostream& s, std::vector<double> v){
 
 }
 
-void SquareMatrix::helperFunc(std::string &strnum){
+void SquareMatrix::isValidInput(std::string &strnum){
 	std::string tryagain;
 	int bad = 0;
 	int watchout = 0;
@@ -56,11 +58,12 @@ void SquareMatrix::helperFunc(std::string &strnum){
 		}
 	}
 
-	//if bad = 1 or watchout <= 2, redirects you to the beginning of the function.
+	//if bad = 1 or watchout <= 2,
+	//redirects you to the beginning of the function.
 	if (bad == 1 || 2 <= watchout){
 		std::cout << "Invalid input; please enter numbers. Try again: ";
 		std::cin >> tryagain;
-		helperFunc(tryagain); 
+		isValidInput(tryagain); 
 		strnum = tryagain;
 	}
 
@@ -76,6 +79,18 @@ void SquareMatrix::changeToZerosIfNeeded(SquareMatrix& sm){
 			if (fabs(sm.matrix[i][j]) < tolerance){
 				sm.matrix[i][j] = 0;
 			}
+		}
+	}
+
+}
+
+void SquareMatrix::changeToZerosIfNeeded(std::vector<double>& myV){
+
+	//changes values if they are below a certain tolerance (due to
+	//floating-point precision errors)
+	for (unsigned i = 0; i < myV.size(); ++i){
+		if (fabs(myV[i]) < tolerance){
+			myV[i] = 0;
 		}
 	}
 
@@ -334,7 +349,7 @@ void SquareMatrix::consoleInput(){ //inputs for the nxn matrix.
 			<< rowCounter + 1 << ":" << std::endl;
 		for (int j = 0; j < dimension; ++j){
 			std::cin >> acoeff;
-			helperFunc(acoeff);
+			isValidInput(acoeff);
 			matrix[rowCounter][j] = stod(acoeff);
 		}
 		++rowCounter;
@@ -583,7 +598,8 @@ std::vector<double> SquareMatrix::verticalShear(double multiplier,
 
 }
 
-std::vector<double> SquareMatrix::horizontalFlip(const std::vector<double>& myVector){
+std::vector<double>
+SquareMatrix::horizontalFlip(const std::vector<double>& myVector){
 
 	if (myVector.size() != 3){
 		std::cout << "Error: Must be a 3-dimensional vector" << std::endl;
@@ -606,7 +622,8 @@ std::vector<double> SquareMatrix::horizontalFlip(const std::vector<double>& myVe
 
 }
 
-std::vector<double> SquareMatrix::verticalFlip(const std::vector<double>& myVector){
+std::vector<double>
+SquareMatrix::verticalFlip(const std::vector<double>& myVector){
 
 	if (myVector.size() != 3){
 		std::cout << "Error: Must be a 3-dimensional vector" << std::endl;
@@ -687,28 +704,96 @@ SquareMatrix SquareMatrix::rowEchelon(){
 
 	SquareMatrix temp = *this;
 
-	//row reduces the matrix temp.
-	for (int i = 0; i < dimension - 1; ++i){
+	//inefficient bubble-sort sorting algorithm to place all zero rows
+	//at the bottom
+
+	for (int i = 0; i < temp.dimension; ++i){
+		for (int j = i; j < temp.dimension; ++j){
+
+			//breaks if row j is not a zero vector.
+			if (temp.matrix[i] != std::vector<double>(temp.matrix[i].size(), 0)
+			){
+				break;
+			}
+
+			//may swap zero vectors with themselves once all zero vectors are
+			//placed at the bottom; not a problem, still.
+			if (temp.matrix[i] == std::vector<double>(temp.matrix[i].size(), 0)
+				&& temp.matrix[i] != temp.matrix[j]){
+				temp.rowSwap(i + 1, j + 1);
+			}
+
+		}
+	}
+
+	//the matrix temp transforms to row-echelon form.
+	for (int i = 0; i < temp.dimension - 1; ++i){
 
 		//swaps the rows if pivot point is zero
 		if (temp.matrix[i][i] == 0){
-			for (int k = i + 1; k < dimension; ++k){
+			int switch_ = 0;
+			for (int k = i + 1; k < temp.dimension; ++k){
 				if (temp.matrix[k][i] != 0){
 					temp.rowSwap(k + 1, i + 1);
+					switch_ = 1;
 					break;
 				}
+			}
+			if (switch_ == 0){
+
+				//this means all numbers below and including pivot are zero.
+
+				//preliminary check to see if columns to the right of pivot
+				//(and below) are equal to zero 
+				//(we must check, or else infinite loop of zero matrix occurs)
+				bool switch_ = false;
+				for (int row = 0; i + row < temp.dimension; ++row){
+					if (temp.matrix[i + row]
+						!= std::vector<double>(temp.matrix[i].size(), 0)){
+						switch_ = true;
+					}
+				}
+				if (switch_ == false){
+					return temp;
+				}
+
+				//move to the next column, treat that element as pivot.
+				SquareMatrix temp_(temp.dimension - i);
+
+				//shift the column by 1 to the right, copy it to temp_.
+				for (int row = 0; row < temp_.dimension; ++row){
+					for (int column = 0; column < temp_.dimension - 1;
+						++column){
+						temp_.matrix[row][column]
+							= temp.matrix[i + row][i + 1 + column];
+					}
+				}
+
+				//perform row echelon on this modified temp matrix
+				temp_ = temp_.rowEchelon();
+
+				//set temp's elements equal to temp_'s by shifting
+				//the column by 1 to the left.
+				for (int row = 0; row < temp_.dimension; ++row){
+					for (int column = 0; column < temp_.dimension - 1;
+						++column){
+						temp.matrix[i + row][i + 1 + column]
+							= temp_.matrix[row][column];
+					}
+				}
+
 			}
 		}
 
 		//multiplies entire row by reciprocal of pivot.
-		for (int j = i; j < dimension; ++j){
+		for (int j = i; j < temp.dimension; ++j){
 			if (temp.matrix[j][i] != 0){
 				temp.rowMul(j + 1, 1 / temp.matrix[j][i]);
 			}
 		}
-
 		//subtracts rows from each other
-		for (int j = i + 1; j < dimension; ++j){
+		//this loop removes all numbers below pivot at row j.
+		for (int j = i + 1; j < temp.dimension; ++j){
 			if (temp.matrix[j][i] != 0){
 				temp.rowNeg(j + 1, i + 1);
 			}
@@ -718,20 +803,9 @@ SquareMatrix SquareMatrix::rowEchelon(){
 
 	changeToZerosIfNeeded(temp);
 
-	if (temp.matrix[dimension - 1][dimension - 1] != 0)
-		temp.matrix[dimension - 1][dimension - 1]
-			/= temp.matrix[dimension - 1][dimension - 1];
-
-	for (int i = 0; i < temp.dimension; ++i){
-		for (int j = 0; j < dimension; j++){
-			if (temp.matrix[i][j] != 1){
-				continue;
-			}
-			else if (i != j){
-				temp.rowSwap(i + 1, j + 1);
-			}
-		}
-	}
+	if (temp.matrix[temp.dimension - 1][temp.dimension - 1] != 0)
+		temp.matrix[temp.dimension - 1][temp.dimension - 1]
+			/= temp.matrix[temp.dimension - 1][temp.dimension - 1];
 
 	return temp;
 
@@ -739,21 +813,45 @@ SquareMatrix SquareMatrix::rowEchelon(){
 
 SquareMatrix SquareMatrix::rowReducedEchelon(){
 
+	//Get the matrix in row-echelon form
 	SquareMatrix temp = rowEchelon();
+	
+	//preliminary check to see if top rows are zero rows
+	//(we must check, or else infinite loop of zero matrix occurs)
+	int zeroRows = 0;
+	for (int row = dimension - 1; 0 <= row; --row){
+		if (temp.matrix[row]
+			== std::vector<double>(temp.matrix[row].size(), 0)){
+			++zeroRows;
+		}
+	}
+	//it's a zero matrix
+	if (zeroRows == temp.dimension){
+		return temp;
+	}
 
-	//back substitution
-
-	for (int i = temp.dimension - 1; 1 <= i; --i){
-		for (int j = i - 1; 0 <= j; --j){
-			if (temp.matrix[i][i] != 0 && temp.matrix[j][i] != 0){
-				temp.rowNeg(j + 1, i + 1, temp.matrix[j][i]);
+	//create zeros above each pivot
+	for (int k = temp.dimension - 1 - zeroRows; 1 <= k; --k){
+		int zerosBeforePivot = 0;
+		//checks where the pivot is
+		for (int j = 0; j < temp.dimension - 1; ++j){
+			if (temp.matrix[k][j] == 0){
+				++zerosBeforePivot;
+			}
+			else{
+				break;
+			}
+		}
+		//eliminates numbers above pivot
+		for (int l = k - 1, j = zerosBeforePivot; 0 <= l; --l){
+			if (temp.matrix[l][j] != 0){
+				temp.rowNeg(l + 1, k + 1, temp.matrix[l][j]);
 			}
 		}
 	}
-	
 
 	return temp;
-	
+
 }
 
 double SquareMatrix::getDeterminant(){
@@ -769,8 +867,13 @@ double SquareMatrix::getDeterminant(){
 	double determinant = 0;
 
 	for (int i = 0; i < dimension; ++i){
-		determinant += matrix[0][i] * submatrix(1, i + 1).getDeterminant()
-			* pow(-1, i);
+		if (matrix[0][i] == 0){
+			continue;
+		}
+		else{
+			determinant += matrix[0][i] * submatrix(1, i + 1).getDeterminant()
+				* pow(-1, i);
+		}
 	}
 
 	return determinant;
@@ -828,126 +931,124 @@ SquareMatrix SquareMatrix::inverse(){
 
 std::vector<double> SquareMatrix::xVec(std::vector<double> bVec){
 
-	SquareMatrix temp = *this;
-	std::vector<double> xVector(temp.dimension, 0);
+	std::vector<double> xVector(dimension, 0);
 
 	//A^-1*b
 	if (getDeterminant() != 0){
-		return temp.inverse()*bVec;
+		return (*this).inverse()*bVec;
 	}
-	else if (temp.dimension != bVec.size()){
+	//incompatible dimensions
+	else if (dimension != bVec.size()){
 		std::cout << "Error: incompatible dimensions" << std::endl;
 		return xVector;
 	}
+	//cx = 0
 	else if (bVec.size() == 1 && bVec[0] == 0){
 		xVector.resize(1);
-		if (temp(1, 1) == 0){
+		//0x = 0
+		if (matrix[0][0] == 0){
 			std::cout << "Any solution works." << std::endl;
 		}
+		//c*0 = 0
 		xVector[0] = 0;
 		return xVector;
 	}
 
-	//row reduces the matrix temp.
+	//Assume the matrix is a (n+1)x(n+1) with a zero row at the bottom.
+	//copying the nxn portion
+	SquareMatrix temp(this->dimension + 1);
+	for (int i = 0; i < dimension; ++i){
+		for (int j = 0; j < dimension; ++j){
+			temp.matrix[i][j] = this->matrix[i][j];
+		}
+	}
+	//copying the nx1th column
 	for (int i = 0; i < temp.dimension - 1; ++i){
-
-		//swaps the rows if pivot point is zero
-		if (temp.matrix[i][i] == 0){
-			for (int k = i + 1; k < temp.dimension; ++k){
-				if (temp.matrix[k][i] != 0){
-					temp.rowSwap(k + 1, i + 1);
-					std::swap(bVec[k], bVec[i]);
-					break;
-				}
-			}
-		}
-
-		//multiplies entire row by reciprocal of pivot.
-		for (int j = i; j < temp.dimension; ++j){
-			if (temp.matrix[j][i] != 0){
-				//bVec[j] reassignment MUST go before
-				//temp reassignment.
-				bVec[j] /= temp.matrix[j][i];
-				temp.rowMul(j + 1, 1 / temp.matrix[j][i]);
-			}
-		}
-
-		//subtracts rows from each other
-		for (int j = i + 1; j < temp.dimension; ++j){
-			if (temp.matrix[j][i] != 0){
-				temp.rowNeg(j + 1, i + 1);
-				bVec[j] -= bVec[i];
-			}
-		}
-
+		temp.matrix[i][temp.dimension - 1] = bVec[i];
 	}
 
-	changeToZerosIfNeeded(temp);
+	temp = temp.rowEchelon();
 
-	if (temp.matrix[dimension - 1][dimension - 1] != 0){
-
-		bVec[dimension - 1] /= temp.matrix[dimension - 1][dimension - 1];
-		temp.matrix[dimension - 1][dimension - 1] 
-			/= temp.matrix[dimension - 1][dimension - 1];
-
-	}
-
-	//(inefficient) bubble-sort algorithm to 
-	//place the pivots where they belong
-	for (int i = 0; i < temp.dimension; ++i){
-		for (int j = 0; j < dimension; j++){
-			if (temp.matrix[i][j] != 1){
-				continue;
-			}
-			else if (i != j){
-				temp.rowSwap(i + 1, j + 1);
-			}
-		}
-	}
-
-	//matrix A is row-reduced and b is consistent with these operations
+	//Augmented matrix A is in row-echelon
 	//now we are ready for back substitution
 
 	//the last index
-	int start = temp.dimension - 1;
+	int start = temp.dimension - 2;
 
-	for (int k = 0; k < temp.dimension; ++k){
-
-		double restOfRowValue = 0;
-		int counter = 0;
-		//detects if equation has a free variable.
-		if (bVec[start - k] == 0){
-			for (int i = 0; i < temp.dimension; ++i){
-				if (temp.matrix[start - k][i] == 0){
-					++counter;
-				}
-				else
-					break;
-			}
-			if (counter == temp.dimension){
-				std::cout << "x_" << start - k + 1 << " is free;";
-				std::cout << " setting it equal to one..." << std::endl;
-				xVector[start - k] = 1;
-				continue;
-			}
+	//detect if A is consistent by making sure no pivot exists in b-column.
+	std::vector<double> zero_vector(temp.dimension - 1, 0);
+	for (int i = 0; i < temp.dimension - 1; ++i){
+		std::vector<double> test_vector(temp.dimension - 1, 0);
+		for (int j = 0; j < temp.dimension - 1; ++j){
+			test_vector[j] = temp.matrix[i][j];
 		}
-
-		//detects if equation is inconsistent
-		else if (temp.matrix[start - k][start - k] == 0){
+		if (test_vector == zero_vector
+			&& temp.matrix[i][temp.dimension - 1] != 0){
 			std::cout << "Inconsistent system detected;";
-			std::cout << " matrix has only trivial solution." << std::endl;
-			std::vector<double> newVec(temp.dimension, 0);
+			std::cout << " matrix has no solution. " << std::endl;
+			std::cout << "Returning default zero vector." << std::endl;
+			std::vector<double> newVec(temp.dimension - 1, 0);
 			return newVec;
 		}
+	}
 
-		//b - Ax to find the next x-value
-		for (int j = start; start - k < j; --j){
-			restOfRowValue += temp.matrix[start - k][j]*xVector[j];
+	//detect which variables of A are free
+	//by checking which columns aren't pivot columns
+	std::vector<bool> pivotColumns(temp.dimension - 1, false);
+	for (int i = 0; i < temp.dimension - 1; ++i){
+		for (int j = 0; j < temp.dimension - 1; ++j){
+			if (temp.matrix[i][j] != 0){
+				pivotColumns[j] = true;
+				break;
+			}
+		}
+	}
+
+	//runs through pivotColumns; false means the variable is free
+	for (int i = 0; i < temp.dimension - 1; ++i){
+		if (pivotColumns[i] == false){
+			std::cout << "x_" << i + 1 << " is free;";
+			std::cout << " setting it equal to one..." << std::endl;
+			xVector[i] = 1;
+		}
+	}
+
+	//b - Ax to find the next x-value
+	//finds first non-zero row from the bottom.
+	int subtractedRow = 0;
+	for (int i = start; 0 <= i; --i){
+		if (temp.matrix[i] == std::vector<double>(temp.dimension, 0)){
+			++subtractedRow;
+		}
+	}
+	//row i
+	//pivot is assumed to equal 1
+	bool breaker = false;
+	for (int i = start - subtractedRow, k = xVector.size() - 1; 0 <= i; --i, --k){
+		//if x_k is free, skip over that x.
+		//make sure k is not negative.
+		while (xVector[k] == 1){
+			--k;
+			if (k < 0){
+				breaker = true;
+				break;
+			}
+		}
+		if (breaker == true){
+			break;
+		}
+		double _Ax = 0;
+
+		//calculate _Ax in row i
+		for (int j = start; k < j; --j){
+			_Ax += temp.matrix[i][j] * xVector[j];
+
 		}
 
-		xVector[start - k] = bVec[start - k] - restOfRowValue;
-
+		xVector[k] = temp.matrix[i][temp.dimension - 1] - _Ax;
 	}
+
+	changeToZerosIfNeeded(xVector);
 
 	return xVector;
 
