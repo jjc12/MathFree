@@ -23,10 +23,13 @@ private:
 	std::vector< std::vector<double> > matrix; 
 
 	// helper function for correct input.
-	void helperFunc(std::string &strnum);
+	void isValidInput(std::string &strnum);
 
 	// helper function to change numbers of magnitude <1e-12 to zero.
 	void changeToZerosIfNeeded(SquareMatrix&);
+	//override
+	void SquareMatrix::changeToZerosIfNeeded(std::vector<double>& myV);
+
 	//tolerance for said change
 	const double tolerance = 1e-12;
 
