@@ -2,6 +2,8 @@
 //this class still needs to implement all six "freebies" 
 //i.e. move constructor, move assignment operator, etc.
 
+#ifndef _SQUAREMATRIX_FREE__H
+#define _SQUAREMATRIX_FREE__H
 #include <vector>
 #include <iostream>
 #include <fstream>
@@ -141,3 +143,6 @@ public:
 	//std::vector<SquareMatrix> factorLU();
 
 };
+
+
+#endif
