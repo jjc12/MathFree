@@ -28,7 +28,7 @@ private:
 	// helper function to change numbers of magnitude <1e-12 to zero.
 	void changeToZerosIfNeeded(SquareMatrix&);
 	//override
-	void SquareMatrix::changeToZerosIfNeeded(std::vector<double>& myV);
+	void changeToZerosIfNeeded(std::vector<double>&);
 
 	//tolerance for said change
 	const double tolerance = 1e-12;
