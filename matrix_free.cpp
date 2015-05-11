@@ -691,7 +691,7 @@ Matrix Matrix::rotation(double angle,
 	mNew.matrix[0][1] = sin(angle);
 	mNew.matrix[0][2] = 0;
 	mNew.matrix[1][0] = -sin(angle);
-	mNew.matrix[1][1] = cos(angle);
+	mNew.matrix[1][1] = cos(angle); 
 	mNew.matrix[1][2] = 0;
 	mNew.matrix[2][0] = 0;
 	mNew.matrix[2][1] = 0;
@@ -744,7 +744,7 @@ Matrix Matrix::rowEchelon(){
 			}
 			if (switch_ == 0){
 
-				//this means all numbers below and including pivot are zero.
+				//this means all numbers below and including "pivot" are zero.
 
 				//preliminary check to see if columns to the right of pivot
 				//(and below) are equal to zero 
@@ -761,7 +761,7 @@ Matrix Matrix::rowEchelon(){
 				}
 
 				//move to the next column, treat that element as pivot.
-				Matrix temp_(temp.rows - i, temp.rows - i);
+				Matrix temp_(temp.rows - i, temp.columns - i);
 
 				//shift the column by 1 to the right, copy it to temp_.
 				for (int row = 0; row < temp_.rows; ++row){
@@ -786,6 +786,7 @@ Matrix Matrix::rowEchelon(){
 				}
 
 			}
+
 		}
 		
 		changeToZerosIfNeeded(temp);
@@ -796,6 +797,7 @@ Matrix Matrix::rowEchelon(){
 				temp.rowMul(j + 1, 1 / temp.matrix[j][i]);
 			}
 		}
+
 		//subtracts rows from each other
 		//this loop removes all numbers below pivot at row j.
 		for (int j = i + 1; j < temp.rows; ++j){
@@ -808,9 +810,19 @@ Matrix Matrix::rowEchelon(){
 
 	changeToZerosIfNeeded(temp);
 
-	if (temp.matrix[temp.rows - 1][temp.columns - 1] != 0)
-		temp.matrix[temp.rows - 1][temp.columns - 1]
-		/= temp.matrix[temp.rows - 1][temp.columns - 1];
+	//ensures the bottom pivot is equal to one.
+	//this check is invalid. change so that it equals the bottom pivot (not the bottom-corner).
+	for (int j = 0; j < temp.columns; ++j){
+
+		changeToZerosIfNeeded(temp);
+
+		if (temp.matrix[temp.rows - 1][j] != 0){
+			temp.rowMul(temp.rows, 1 / temp.matrix[temp.rows - 1][j]);
+			break;
+		}
+	}
+
+	changeToZerosIfNeeded(temp);
 
 	return temp;
 
@@ -966,7 +978,6 @@ Matrix Matrix::xVec(const Matrix& bVec){
 		xVector[0] = 0;
 		return xVector;
 	}
-
 	//either system is overdetermined or underdetermined.
 	//modifies the matrix so rows = columns and calls xVec().
 	if (rows != columns){
@@ -982,22 +993,23 @@ Matrix Matrix::xVec(const Matrix& bVec){
 			}
 
 			Matrix modVec(1, columns);
-
+			//copying the vector b.
 			for (int i = 0; i < modVec.columns; ++i){
 				modVec.matrix[0][i] = bVec.matrix[0][i];
 			}
-
 			Matrix soln = solnMatrix.xVec(modVec);
 
-			//substitute this solution into original matrix for each row
-			//from index == columns.
+			//substitute this solution into original matrix
 			Matrix testMatrix(rows, 1);
 			for (int i = 0; i < rows; ++i){
+
 				double tempvar = 0;
 				for (int j = 0; j < columns; ++j){
-					tempvar += matrix[i][j] * soln.matrix[0][j];
+					tempvar += matrix[i][j] * soln.matrix[j][0];
 				}
-				testMatrix.matrix[i][0] = tempvar;
+				//store the residual
+				testMatrix.matrix[i][0] = tempvar - bVec.matrix[0][i];
+
 			}
 			changeToZerosIfNeeded(testMatrix);
 
@@ -1005,7 +1017,7 @@ Matrix Matrix::xVec(const Matrix& bVec){
 			for (int i = 0; i < rows; ++i){
 				if (testMatrix.matrix[i][0] != 0){
 					//elements are zero by default
-					return Matrix(1, soln.columns);
+					return Matrix(soln.rows, 1);
 				}
 			}
 
