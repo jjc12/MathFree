@@ -16,7 +16,7 @@ class Matrix{
 
 	//output overloads for ostream
 	friend std::ostream& operator<<(std::ostream& s, const Matrix& m);
-	friend std::ostream& operator<<(std::ostream& s, std::vector<double> v);
+	friend std::ostream& operator<<(std::ostream& s, const std::vector<double>& v);
 
 	//left-scalar multiplication e.g. 4*matrixObject;
 	friend Matrix operator*(double scalar, const Matrix& matrix2);
