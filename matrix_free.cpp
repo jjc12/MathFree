@@ -340,6 +340,7 @@ Matrix Matrix::operator*(const Matrix& matrix2) const{
 			mProd.matrix[i][j] = tempvar;
 		}
 	}
+
 	return mProd;
 
 }
@@ -1000,6 +1001,7 @@ Matrix Matrix::xVec(const Matrix& bVec){
 			Matrix soln = solnMatrix.xVec(modVec);
 
 			//substitute this solution into original matrix
+			//need to ensure that floating-point error does not occur.
 			Matrix testMatrix(rows, 1);
 			for (int i = 0; i < rows; ++i){
 
@@ -1014,9 +1016,13 @@ Matrix Matrix::xVec(const Matrix& bVec){
 			changeToZerosIfNeeded(testMatrix);
 
 			//if residual of sol'n is not zero, then zero-vector is returned.
+			//this implies an inconsistent system.
 			for (int i = 0; i < rows; ++i){
 				if (testMatrix.matrix[i][0] != 0){
 					//elements are zero by default
+					std::cout << "Inconsistent system detected;";
+					std::cout << " matrix has no solution. " << std::endl;
+					std::cout << "Returning default zero vector." << std::endl;
 					return Matrix(soln.rows, 1);
 				}
 			}
