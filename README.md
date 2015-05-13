@@ -1,13 +1,6 @@
-# MathFree
+# MatrixFree
 
-MathFree is a free, open-source C++ library that includes files written to manipulate the following mathematics-based
-objects:
-
--Square matrices (found in SquareMatrixFree)
-
-### SquareMatrixFree
-
-SquareMatrix is a class written to manipulate nxn (square) matrices.
+MatrixFree is a free, open-source library written to manipulate matrices.
 
 ##### Demonstration 
 
