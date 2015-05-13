@@ -1,3 +1,9 @@
+# MathFree
+
+MathFree is a free, open-source C++ library written to manipulate mathematical structures. MathFree consists of:
+
+-MatrixFree, written to manipulate matrices
+
 # MatrixFree
 
 MatrixFree is a free, open-source library written to manipulate matrices.
